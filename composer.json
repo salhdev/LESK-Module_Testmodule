@@ -1,0 +1,11 @@
+{
+    "name": "TestModule",
+    "description": "TestModule module.",
+    "keywords": ["TestModule", "module", "test"],
+    "require": {
+		"edofre/laravel-slider-pro": "v1.0.2"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

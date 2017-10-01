@@ -1,0 +1,9 @@
+{
+	"name": "Testmodule",
+	"slug": "testmodule",
+	"namespace": "Testmodule",
+	"version": "1.0",
+	"author": "SR",
+	"license": "GPL-3.0",
+	"description": "This is the description for the Testmodule module."
+}
