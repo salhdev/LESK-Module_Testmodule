@@ -1,11 +1,29 @@
 {
-    "name": "TestModule",
-    "description": "TestModule module.",
-    "keywords": ["TestModule", "module", "test"],
+	"name": "salhdev/lesk-module_testmodule",
+	"description": "Module for testing LESK Modules",
+    "type": "lesk-module",
+    "keywords": [
+        "lesk",
+        "test",
+        "module"
+    ],
+    "authors": [
+        {
+            "name": "Salh",
+            "email": "salh@raffali.com"
+        }
+    ],
+    "license": "MIT",
     "require": {
+        "composer/installers": "dev-dev-lesk-modules-and-themes",
 		"edofre/laravel-slider-pro": "v1.0.2"
+    },
+    "extra": {
+        "installer-name": "Testmodule"
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

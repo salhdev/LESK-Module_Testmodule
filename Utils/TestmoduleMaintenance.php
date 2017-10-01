@@ -51,6 +51,8 @@ class TestmoduleMaintenance implements ModuleMaintenanceInterface
             $menuToolsContainer = self::createMenu( 'tools-container', 'Tools', 10, 'fa fa-folder', 'home', true );
             self::createMenu( 'testmodule.index', 'Testmodule', 0, 'fa fa-file', $menuToolsContainer, false, $routeHome );
         }); // End of DB::transaction(....)
+    // TODO : after install : php artisan vendor:publish --tag=slider-\pro
+
     }
 
 

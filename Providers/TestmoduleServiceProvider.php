@@ -61,7 +61,6 @@ class TestmoduleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'testmodule'
         );
-        // TODO : after install : php artisan vendor:publish --tag=slider-\pro
     }
 
 	/**
