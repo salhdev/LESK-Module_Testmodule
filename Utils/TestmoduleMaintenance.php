@@ -7,11 +7,11 @@ use Schema;
 use Sroutier\LESKModules\Contracts\ModuleMaintenanceInterface;
 use Sroutier\LESKModules\Traits\MaintenanceTrait;
 
+use App;
+
 class TestmoduleMaintenance implements ModuleMaintenanceInterface
 {
-
     use MaintenanceTrait;
-
 
     static public function initialize()
     {
@@ -29,30 +29,49 @@ class TestmoduleMaintenance implements ModuleMaintenanceInterface
 
             //////////////////////////////////////////
             // Create permissions.
-            $permUseTestmodule = self::createPermission(  'use-testmodule',
+            $permUseTestmodule = self::createPermission(
+                'use-testmodule',
                 'Use the Testmodule module',
-                'Allows a user to use the Testmodule module.');
+                'Allows a user to use the Testmodule module.'
+            );
             ///////////////////////////////////////
             // Register routes.
-            $routeHome = self::createRoute( 'testmodule.index',
+            $routeHome = self::createRoute(
+                'testmodule.index',
                 'testmodule',
                 'App\Modules\Testmodule\Http\Controllers\TestmoduleController@index',
-                $permUseTestmodule );
+                $permUseTestmodule
+            );
 
             ////////////////////////////////////
             // Create roles.
-            self::createRole( 'testmodule-users',
+            self::createRole(
+                'testmodule-users',
                 'Testmodule Users',
                 'Users of the Testmodule module.',
-                [$permUseTestmodule->id] );
+                [$permUseTestmodule->id]
+            );
 
             ////////////////////////////////////
             // Create menu system for the module
-            $menuToolsContainer = self::createMenu( 'tools-container', 'Tools', 10, 'fa fa-folder', 'home', true );
-            self::createMenu( 'testmodule.index', 'Testmodule', 0, 'fa fa-file', $menuToolsContainer, false, $routeHome );
+            $menuToolsContainer = self::createMenu('tools-container', 'Modules', 10, 'fa fa-folder', 'home', true);
+            self::createMenu('testmodule.index', 'Testmodule', 0, 'fa fa-file', $menuToolsContainer, false, $routeHome);
         }); // End of DB::transaction(....)
-    // TODO : after install : php artisan vendor:publish --tag=slider-\pro
 
+    // on istallation run the artisan command of the package : php artisan vendor:publish --tag=slider-\pro
+        if (!App::getProvider('Edofre\SliderPro\SliderProServiceProvider')) {
+            App::register('Edofre\SliderPro\SliderProServiceProvider');
+        }
+        \Artisan::call('vendor:publish', [
+                '--tag' => ['slider-pro', ]//,
+//                '--force' => true
+        ]);        
+        if (!App::getProvider('Artesaos\SEOTools\Providers\SEOToolsServiceProvider')) {
+            App::register('Artesaos\SEOTools\Providers\SEOToolsServiceProvider');
+        }
+        \Artisan::call('vendor:publish', [
+            '--provider' => 'Artesaos\SEOTools\Providers\SEOToolsServiceProvider'
+        ]); // publishes /config/seotools.php
     }
 
 
@@ -77,14 +96,12 @@ class TestmoduleMaintenance implements ModuleMaintenanceInterface
         }); // End of DB::transaction(....)
     }
 
-
     static public function enable()
     {
         DB::transaction(function () {
             self::enableMenu('testmodule.index');
         });
     }
-
 
     static public function disable()
     {
@@ -93,16 +110,13 @@ class TestmoduleMaintenance implements ModuleMaintenanceInterface
         });
     }
 
-
     static public function buildDB()
     {
         // Add code to build database and tables as needed.
     }
 
-
     static public function destroyDB()
     {
         // Add code to destroy database and tables as needed.
     }
-
 }

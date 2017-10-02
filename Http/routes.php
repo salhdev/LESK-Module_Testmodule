@@ -23,7 +23,7 @@
 */
 
 Route::group(['prefix' => 'testmodule', 'middleware' => ['web']], function () {
-	//
+    //
 });
 
 
@@ -33,8 +33,10 @@ Route::group(['middleware' => 'authorize'], function () {
 
     // Testmodule routes
     Route::group(['prefix' => 'testmodule'], function () {
-        Route::get('/',        ['as' => 'testmodule.index',         'uses' => 'TestmoduleController@index']);
+//        Route::get('/',        ['as' => 'testmodule.index',         'uses' => 'TestmoduleController@index']);
+//        Removed the index extension to testmodule because it can not find it when redirected as home page :(
+//  TODO: Declare Bug to be further investigated !
+//  
+        Route::get('/', ['as' => 'testmodule', 'uses' => 'TestmoduleController@index']);
     }); // End of Testmodule group
-
-
 }); // end of AUTHORIZE middleware group
